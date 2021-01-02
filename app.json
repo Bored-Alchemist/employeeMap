@@ -1,0 +1,28 @@
+{
+  "name": "employee",
+  "displayName": "employee",
+  "expo": {
+    "name": "Employee",
+    "slug": "Employee",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/logo.png",
+    "splash": {
+      "image": "./src/assets/pngs/splash.png",
+      "resizeMode" : "contain",
+      "backgroundColor": "#a00030"
+    },
+    "sdkVersion" : "38.0.0",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "package": "com.Su_arm64.Employee",
+      "versionCode": 1, 
+           "enableDangerousExperimentalLeanBuilds" : true
+    }
+  }
+}
