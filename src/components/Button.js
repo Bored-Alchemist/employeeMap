@@ -15,7 +15,7 @@ import { dark_grey } from '../assets/colors';
 
 const styles = StyleSheet.create({
     button: {
-        borderRadius: 15,
+        borderRadius: 10,
         paddingTop:10,
         paddingBottom:10,
         justifyContent: 'center',

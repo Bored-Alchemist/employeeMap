@@ -1,10 +1,15 @@
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, ToastAndroid, BackHandler, ImageBackground } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Image, ScrollView, ToastAndroid, BackHandler, ImageBackground, TouchableOpacity } from 'react-native';
 import Header from '../components/Header';
 import { height, width } from '../assets/dimensions';
 import Button from '../components/Button';
+import { AntDesign } from '@expo/vector-icons'
+import { feedbackapi } from '../action/auth';
+import { connect } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Feedback = ({ navigation }) => {
+const Feedback = ({ navigation, feedbackapi }) => {
+    const [star, setstar] = useState(0)
     useEffect(() => {
         const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
         return () => {
@@ -16,13 +21,44 @@ const Feedback = ({ navigation }) => {
         navigation.navigate('Home');
         return true;
     }
+
+    const stars = (rating) => {
+    const starel = (index, color) => {
+        return(
+            <TouchableOpacity key={index} onPress={() => setstar(index+1)}>
+                <AntDesign name="star" size={40} color={color} key={index} />
+            </TouchableOpacity>
+        )
+    };
+        var represent = [];
+        for(var i = 0; i < 5; i++){
+            if(i < star){
+                represent.push(starel(i, "#ffeb3b"))
+            }else{
+                represent.push(starel(i, "grey"))
+            }
+        }
+        return(
+            <View style={{flex: 1, flexDirection: "row", justifyContent: "space-around", marginTop: 20}}>
+                {represent}
+            </View>
+        )
+    }
+
+    const submit = async () => {
+        const user = JSON.parse(await AsyncStorage.getItem('user'));
+        const data = {"orderid": "1", "userid": user.consumerid, "rating": star}
+        const response = await feedbackapi(data);
+        console.log(response)
+        setstar(0)
+    }
     return (
         <ScrollView style={{
             flex: 1
         }}>
             <Header image={true} navigation={navigation} />
         <View style={styles.mainContainer}>
-            <View style={{ustifyContent: 'flex-start',
+            <View style={{justifyContent: 'flex-start',
         alignItems: 'center',
         marginTop: height*0.06, marginBottom:height*0.07}}>
                 <Image source={require('../assets/pngs/Image04.png')} resizeMode="contain" style={{height: height*0.3}} />
@@ -34,11 +70,15 @@ const Feedback = ({ navigation }) => {
                     <Text style={{fontSize:16,marginTop:20, textAlign:'center', color: '#a00030'}}>
                         Your order will be safely and successfully delivered
                     </Text>
+                    <Text style={{fontSize: 20, fontWeight: "bold", color: "#a00030"}}>Please Rate Your Experience</Text>
+                    {stars()}
             </View>
             
             <View style={{flex:1, paddingHorizontal:20}}>
-                <Button label="Continue" bgColor="#B50019" textColor="white" clickEvent={()=>navigation.navigate('Home')} />
-                
+                <Button label="Continue" bgColor="#B50019" textColor="white" clickEvent={()=>{
+                        submit()
+                        navigation.navigate('Home');
+                    }} />
             </View>
             
         </View>
@@ -76,5 +116,8 @@ const mapStateToProps = state => ({
 
 })
 
-
-export default Feedback
+export default connect(
+    mapStateToProps, {
+        feedbackapi
+    }
+) (Feedback)

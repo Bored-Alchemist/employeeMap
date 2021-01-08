@@ -38,7 +38,7 @@ import userData from '../../App';
     return (
         <View style={styles.main}>
             <View style={styles.start}>
-              <TouchableOpacity onPress={() => navigation.navigate('Venderlist')}>
+              <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                 <Image source={require('../assets/pngs/Logo02.png')} style={{height: 30}} resizeMode='contain'/>
               </TouchableOpacity>
             </View>

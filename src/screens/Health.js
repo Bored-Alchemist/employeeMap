@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, BackHandler, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, BackHandler, ImageBackground, TouchableOpacity, ProgressBarAndroid } from 'react-native';
 import Header from '../components/Header';
 import {getCalories} from '../action/auth';
 import { height, width } from '../assets/dimensions';
@@ -9,32 +9,19 @@ import Loader from '../components/Loader';
 import Healthy from '../assets/icons/healthy';
 
 const Health = ({ navigation, getCalories }) => {
-    const [cal, setCal] = useState(0)
+    const [cal, setCal] = useState(null)
     const [loading, isLoading] = useState(true);
-    // useEffect(() => {
-    //     const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-    //     return () => {
-    //       backHandler.remove();
-    //     };
-    //   }, []);
-
-    //   function handleBackButtonClick() {
-    //     navigation.navigate('Venderlist');
-    //     return true;
-    // }
     useEffect(()=>{
         fetchCalories()
     },[])
 
     const fetchCalories = async () => {
         const user = JSON.parse(await AsyncStorage.getItem('user'));
-        console.log({cust_id: user.cust_id, org_id: user.org_name});
-        const response = await getCalories({cust_id: user.cust_id});
+        const response = await getCalories({customerid: user.customerid});
         if(response.success) {
-            console.log(response);
-            const calarious = response.data[0];
-            const indexofdot = calarious.indexOf('.');
-            setCal(calarious.slice(0, indexofdot+2))
+            const calarious = response.menulist[0];
+            const indexofdot = calarious.calories.indexOf('.');
+            setCal(calarious)
         }
         isLoading(false);
     }
@@ -51,15 +38,74 @@ const Health = ({ navigation, getCalories }) => {
                 </Text>
             </View>
             <View style={{height: 210, justifyContent: "center", alignItems: "center", marginTop: 15}}>
-                <Healthy />
+            <Image source={require('../assets/health.png')} style={{height: 200}} resizeMode='contain' />
             </View>
             <View style={{justifyContent:'center', alignContent:'center',alignItems:'center'}}>
-                <View style={{justifyContent:'center', alignContent:'center',alignItems:'center', 
-                height: width * 0.8 , width: width * 0.8, backgroundColor: "#7c4dff", marginTop: 50, borderRadius: width * 0.4}}>
-                    <Text style={{color: 'white', fontSize: 40}}>Calories</Text>
-                    <Text style={{color:'white', fontSize:45, fontWeight:'bold'}}>
-                        {cal ? cal : 0}
-                    </Text>
+                <View>
+                    <TouchableOpacity style={{...styles.card}}>
+                        <View style={{flexDirection: "row", alignContent: "space-around", flex: 1, width: width * 0.8}}>
+                            <View style={{display: "flex", height: 25, elevation: 12}} >
+                                <Text style={{textAlign:'center', color: 'black', fontSize:20, fontWeight: "bold"}}>{cal ? cal.calories : 0}{` `} </Text>
+                            </View>
+                            <Text style={{color: 'black', fontSize:22, fontWeight: "bold"}}>
+                                Calories
+                            </Text>
+                        </View>
+                        <View style={{flex: 1, justifyContent: "flex-end"}}>
+                            <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a00030" progress={cal ? parseInt(cal.calories)/2500 : 0} />
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={{justifyContent:'center', alignContent:'center',alignItems:'center'}}>
+            <View>
+                    <TouchableOpacity style={{...styles.card}}>
+                        <View style={{flexDirection: "row", alignContent: "space-around", flex: 1, width: width * 0.8}}>
+                            <View style={{display: "flex", height: 25, elevation: 12}} >
+                                <Text style={{textAlign:'center', color: 'black', fontSize:20, fontWeight: "bold"}}>{cal ? cal.carbs : 0}{` `} </Text>
+                            </View>
+                            <Text style={{color: 'black', fontSize:22, fontWeight: "bold"}}>
+                                Carbs
+                            </Text>
+                        </View>
+                        <View style={{flex: 1, justifyContent: "flex-end"}}>
+                            <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a00030" progress={cal ? parseInt(cal.carbs)/2500 : 0} />
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={{justifyContent:'center', alignContent:'center',alignItems:'center'}}>
+            <View>
+                    <TouchableOpacity style={{...styles.card}}>
+                        <View style={{flexDirection: "row", alignContent: "space-around", flex: 1, width: width * 0.8}}>
+                            <View style={{display: "flex", height: 25, elevation: 12}} >
+                                <Text style={{textAlign:'center', color: 'black', fontSize:20, fontWeight: "bold"}}>{cal ? cal.fats : 0}{` `} </Text>
+                            </View>
+                            <Text style={{color: 'black', fontSize:22, fontWeight: "bold"}}>
+                                Total Fats
+                            </Text>
+                        </View>
+                        <View style={{flex: 1, justifyContent: "flex-end"}}>
+                            <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a00030" progress={cal ? parseInt(cal.fats)/2500 : 0} />
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={{justifyContent:'center', alignContent:'center',alignItems:'center'}}>
+            <View>
+                    <TouchableOpacity style={{...styles.card}}>
+                        <View style={{flexDirection: "row", alignContent: "space-around", flex: 1, width: width * 0.8}}>
+                            <View style={{display: "flex", height: 25, elevation: 12}} >
+                                <Text style={{textAlign:'center', color: 'black', fontSize:20, fontWeight: "bold"}}>{cal ? cal.proteins : 0}{` `} </Text>
+                            </View>
+                            <Text style={{color: 'black', fontSize:22, fontWeight: "bold"}}>
+                                Proteins
+                            </Text>
+                        </View>
+                        <View style={{flex: 1, justifyContent: "flex-end"}}>
+                            <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a00030" progress={cal ? parseInt(cal.proteins)/2500 : 0} />
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </View>
             
@@ -80,11 +126,10 @@ const styles = StyleSheet.create({
         // height: height * 0.1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        marginTop: height*0.25
+        marginTop: height*0.2
     },
     formContainer: {
         flex: 1.4,
-        // height: height * 0.45,
         paddingHorizontal: width * 0.07,
         justifyContent: 'flex-start'
     },
@@ -92,7 +137,20 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'white',
         marginBottom: 8
-    }
+    },
+    card: {
+        display:'flex', 
+        flexDirection:'column',
+        justifyContent: "center",
+        height: 70, 
+        width: width * 0.9, 
+        marginVertical: 2.5,
+        borderRadius: 10 ,
+        padding: 10,
+        backgroundColor: '#f0f0f0',
+        elevation: 2,
+        paddingHorizontal: 15
+    },
 })
 
 

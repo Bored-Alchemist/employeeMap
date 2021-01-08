@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, BackHandler, TouchableHighlight, Alert } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, BackHandler, TouchableHighlight, Alert, Modal } from 'react-native';
 import { red } from '../assets/colors';
 import Header from '../components/Header';
 import CategorySection from '../components/CategorySection';
 import { height, width } from '../assets/dimensions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {vendorDetail} from '../action/auth';
+import { connect } from 'react-redux';
 
-const Home = ({ navigation }) => {
+const Home = ({ route, navigation, vendorDetail }) => {
   const [item, setItem] = useState([]);
-    // useEffect(() => {
-    //     const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-    //     return () => {
-    //       console.log('closed')
-    //       backHandler.remove();
-    //     };
-    //   }, []);
-
-    //   function handleBackButtonClick() {
-    //     console.log('clicked')
-    //     navigation.navigate('Venderlist', {'GO_BACK': true});
-    //     return true;
-    // }
-
+  const [modalVisible, setModalVisible] = useState(false);
+  const [img, setImg] = useState([]);
+  const [vendorDensity, setVendorDensity] = useState(null)
+  useEffect(() => {
+    function handleBackButtonClick() {
+      setModalVisible(true);
+      return true;
+    }
+      const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+      return () => {
+        backHandler.remove();
+      };
+    }, []);
     useEffect(()=>{
           showCart();
       }, [item])
@@ -34,6 +35,25 @@ const Home = ({ navigation }) => {
               setItem([]);
           }
       }
+    
+    useEffect(() => {
+        vendorImg();
+    }, [])
+
+    const vendorImg = async () => {
+       const cusid = JSON.parse(await AsyncStorage.getItem('user')).customerid;
+       const response = await vendorDetail({"customerid": cusid});
+       console.log(response.success, "okk")
+       if(response.success){
+         setVendorDensity(response.cafedensity)
+         var okkk = []
+         response.offerimages.map(item => {
+           okkk = [...okkk, item.offerimage]
+         })
+         console.log(okkk, "okcc")
+         setImg(okkk)
+       }
+     }
 
     return (
         <>
@@ -42,12 +62,41 @@ const Home = ({ navigation }) => {
             backgroundColor: "#f0f0f0"
         }}>
             <Header navigation={navigation} />
-            <View style={{flex: 1, margin: 20, marginTop: 30}}>
-              <Text style={{fontSize: 20, fontWeight: "bold"}}>Hungry?</Text>
-              <Text style={{fontSize: 16}}>Order & Eat</Text>
-            </View>
-            <CategorySection navigation={navigation} />
-            
+            <CategorySection navigation={navigation} density={parseInt(vendorDensity)} img={img} />
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                setModalVisible(false)
+              }}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalText}>Are you sure you want to close this application?</Text>
+
+                  <View style={{justifyContent:'center',alignContent:'center',alignItems:'center', display:'flex',flexDirection:'row'}}>
+                  <TouchableHighlight
+                    style={{ ...styles.openButton, backgroundColor: "#4caf50" }}
+                    onPress={() => {
+                      setModalVisible(false);
+                    }}
+                  >
+                    <Text style={styles.textStyle}>No</Text>
+                  </TouchableHighlight>
+                  <TouchableHighlight
+                    style={{ ...styles.openButton, backgroundColor: "#f44336" }}
+                    onPress={() => {
+                      BackHandler.exitApp();
+                      setModalVisible(false);
+                    }}
+                  >
+                    <Text style={styles.textStyle}>Yes</Text>
+                  </TouchableHighlight>
+                  </View>
+                </View>
+              </View>
+            </Modal>
         </ScrollView>
         </>
     )
@@ -118,8 +167,11 @@ const styles = StyleSheet.create({
 
 
 const mapStateToProps = state => ({
-
 })
 
 
-export default Home
+export default connect(
+  mapStateToProps, {
+      vendorDetail
+  }
+) (Home)

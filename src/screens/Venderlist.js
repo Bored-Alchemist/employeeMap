@@ -7,43 +7,34 @@ import { getVenderlist } from '../action/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import DrawerContext from '../../App';
+import { Buffer } from "buffer";
+
+const apikey = "apikey";
+const thefooods = "thefooods"
+
+const token = Buffer.from(`${apikey}:${thefooods}`, 'utf8').toString('base64')
 
 const Venderlist =  ({navigation, getVenderlist}) => {
     const [companies, setCompanies] = useState([]);
-    const [modalVisible, setModalVisible] = useState(false);
-    const drawer = useContext(DrawerContext)
-    useEffect(() => {
-      function handleBackButtonClick() {
-        setModalVisible(true);
-        return true;
-      }
-        const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        return () => {
-          backHandler.remove();
-        };
-      }, []);
-
-      
 
     useEffect(()=>{
         getComapnies();
     },[]);
 
     const getComapnies = async () => {
-        console.log('api called');
-        const orgID = JSON.parse(await AsyncStorage.getItem('user')).org_name;
-        const ok = {"org_id": orgID}
-        const response = await axios.post(`http://food.breeur.in/api/listofcompanyvendor.php`, ok );
+        const orgID = JSON.parse(await AsyncStorage.getItem('user')).customerorgid;
+        const ok = {"orgid": orgID}
+        const response = await axios.post(`http://data.thefooods.com/v1/corporate/customer/getvendors.php`, ok , {headers: {'Authorization': `Basic ${token}`}});
         console.log(response.data)
         if(response.data.success) {
-            setCompanies(response.data.data)
+            setCompanies(response.data.vendorlist)
             console.log(companies)
         }
     }
 
     const redirectToVendors = (company) => {
-        const id = company.split('-');
-        navigation.navigate('Home', {id: id[1]});
+        const id = company.vendorid;
+        navigation.navigate('CategoryItems', {id: id, name: company.vendorname});
     }
 
     return (
@@ -55,13 +46,24 @@ const Venderlist =  ({navigation, getVenderlist}) => {
                     </Text>
 
     {companies ? companies.map((company, index) =>
-    <TouchableOpacity key={index} style={styles.list} onPress={() => redirectToVendors(company)}>
-        <Text style={styles.comapnies}>
-        {company.split('-')[0]}
-        </Text>
-        <View style={{justifyContent:'center',alignItems:'center',alignContent:'center'}}>
-          <View style={{height: 25, width: 60, backgroundColor: "#a00030", justifyContent:'center',alignItems:'center', borderRadius: 3}}>
-            <Text style={{color: 'white'}}>Select</Text>
+    <TouchableOpacity key={index} style={{...styles.list, justifyContent: "space-between"}} onPress={() => redirectToVendors(company)}>
+        <View style={{width: 15, backgroundColor: "green", height: 70,borderRadius: 3, justifyContent: "center", padding: 3}}>
+          <Text style={{color: "white", textAlign: 'center', fontSize: 10}}>{company.vendortype}</Text>
+        </View>
+        <View style={{flexDirection: "column", justifyContent: "center", alignItems: "center", alignContent: "flex-start"}}>
+          <Text style={{...styles.comapnies, fontWeight: "bold"}}>
+            {company.vendorname}
+          </Text>
+          <Text style={{textAlign: "center"}}>
+            Address :- {company.cafename}
+          </Text>
+          <Text style={{}}>
+            Contact No :- {company.vendornumber}
+          </Text>
+        </View>
+        <View style={{justifyContent:'center',alignItems:'center',alignContent:'center', flexDirection: 'row'}}>
+          <View style={{height: 30, width: 30, backgroundColor: company.cafedensity < 50 ? "#f44336" :"#00c853", justifyContent:'center',alignItems:'center', borderRadius: 15}}>
+            <Text style={{color: "white", fontSize: 10}}>{company.cafedensity}</Text>
           </View>
         </View>
     
@@ -73,40 +75,6 @@ const Venderlist =  ({navigation, getVenderlist}) => {
         </TouchableOpacity>
         }
             </View>
-            <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(false)
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Are you sure you want to close this application?</Text>
-
-            <View style={{justifyContent:'center',alignContent:'center',alignItems:'center', display:'flex',flexDirection:'row'}}>
-            <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#4caf50" }}
-              onPress={() => {
-                setModalVisible(false);
-              }}
-            >
-              <Text style={styles.textStyle}>No</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#f44336" }}
-              onPress={() => {
-                BackHandler.exitApp();
-                setModalVisible(false);
-              }}
-            >
-              <Text style={styles.textStyle}>Yes</Text>
-            </TouchableHighlight>
-            </View>
-          </View>
-        </View>
-      </Modal>
         </ScrollView>
     )
 }
@@ -136,7 +104,7 @@ const styles = StyleSheet.create({
     comapnies: {
         fontSize:22,
         marginHorizontal:15,
-        padding:7,
+        padding:3,
         flex:1
     },
     list: {
@@ -148,45 +116,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         elevation: 2,
         padding:5
-    },
-    centeredView: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 22
-      },
-      modalView: {
-        margin: 20,
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 35,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5
-      },
-      openButton: {
-        backgroundColor: "#F194FF",
-        borderRadius: 20,
-        padding: 10,
-        elevation: 2,
-        flex:1,
-        margin:10
-      },
-      textStyle: {
-        color: "white",
-        fontWeight: "bold",
-        textAlign: "center"
-      },
-      modalText: {
-        marginBottom: 15,
-        textAlign: "center"
-      }
+    }
  });
 
 

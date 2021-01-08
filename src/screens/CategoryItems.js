@@ -8,39 +8,32 @@ import { connect } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Loader from '../components/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import DropDownPicker from 'react-native-dropdown-picker';
+import Button from '../components/Button';
 
- const CategoryItems = ({ image, back, navigation, listOfFoods }) => {
+ const CategoryItems = ({ image, back, navigation, listOfFoods, route }) => {
      const [menus, setMenus] = useState([]);
      const [thali, setThali] = useState([]);
      const [menu, isMenu] = useState(true);
      const [loading, isLoading] = useState(true);
      const [item, setItem] = useState([]);
-
-    //  useEffect(() => {
-    //     const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-    //     return () => {
-    //       backHandler.remove();
-    //     };
-    //   }, []);
-
-    //   function handleBackButtonClick() {
-    //     navigation.goBack();
-    //     return true;
-    // }
+     const [option, setOption] = useState('Pure Veg')
+     const [mar, setMar] = useState(0);
+     const [subOption, setSubOption] = useState('mealbox')
+     const [mar2, setMar2] = useState(0);
 
      useEffect(()=>{
          fetchItems()
      },[]);
 
      const fetchItems = async () => {
-         const user = await AsyncStorage.getItem('user');
-        const params = {"cust_id": JSON.parse(user).cust_id, "org_id" : JSON.parse(user).org_name}
+        const params = {"vendorlist": route.params.id}
         const response = await listOfFoods(params);
         if(response.success) {
             // success
             console.log(response);
-            setMenus(response.menudata);
-            setThali(response.thalidata);
+            setMenus(response.menulist);
+            setThali(response.thalilist);
             isLoading(false);
         }
      }
@@ -62,42 +55,61 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         <>
         {loading && <Loader />}
         {!loading &&  <ScrollView style={{
-            flex: 1, backgroundColor: "#f0f0f0"
+            flex: 1, backgroundColor: "#f0f0f0", height: height * 0.9, marginBottom: height * 0.1
         }}>
             
-            {!loading && 
-            <Header navigation={navigation} />
- }
-       {!loading &&   <View style={{// display:'flex',
-        flexDirection: 'row',
-        // paddingHorizontal: width * 0.04,
-        backgroundColor: '#f0f0f0',
-        // elevation: 4,
-        paddingVertical: height * 0.015,
-        borderBottomColor:'lightgrey',
-        borderBottomWidth:2}}>
-        <View style={{flex:1, justifyContent:'center', alignContent:'center',alignItems:'center', }}>
-        <TouchableOpacity onPress={()=>isMenu(true)} style={{width: width * 0.5, justifyContent:'center', alignContent:'center',alignItems:'center'}} >
-        <Text style={{color:menu ? '#ED2124' : 'black', paddingTop:5,paddingBottom:5, paddingEnd:15, paddingStart:15, borderRadius:200,}}>
-                Menu
-            </Text>
-        </TouchableOpacity>
+        {!loading && <Header navigation={navigation} />}
+       {!loading &&  
+        <View style={{flex:1}}>
+            <View style={{flex: 1, marginHorizontal: 20, marginVertical: 5}}>
+                <Text style={{fontSize: 25, fontWeight: "bold"}}>{route.params.name}</Text>
+            </View>
+            <DropDownPicker
+                items={[
+                    {label: 'Pure Veg', value: 'Pure Veg'},
+                    {label: 'Non-Veg', value: 'Non-veg'},
+                ]}
+                defaultValue={option}
+                onOpen={() => setMar(80)}
+                onClose={() => setMar(0)}
+                containerStyle={{marginBottom: mar,marginHorizontal: 20, marginVertical: 5,}}
+                style={{backgroundColor: "#a00030",  justifyContent: "center", alignItems: "center"}}
+                dropDownStyle={{justifyContent: "center", alignItems: "center"}}
+                activeLabelStyle={{color: 'red'}}
+                labelStyle={{fontWeight: "bold"}}
+                onChangeItem={item => {setOption(item.value)}}
+            />
+            <DropDownPicker
+                items={[
+                    {label: 'Meal Box', value: 'mealbox'},
+                    {label: 'Main Course', value: 'main course'},
+                    {label: 'Snacks', value: 'snacks'},
+                    {label: 'Desserts', value: 'desserts'},
+                    {label: 'Beverages', value: 'beverages'},
+                    {label: 'DietA', value: 'dietA'},
+                    {label: 'DietB', value: 'dietB'},
+                ]}
+                defaultValue={subOption}
+                onOpen={() => setMar2(150)}
+                onClose={() => setMar2(0)}
+                containerStyle={{marginBottom: mar2,marginHorizontal: 20, marginVertical: 5,}}
+                style={{backgroundColor: "#a00030",  justifyContent: "center", alignItems: "center"}}
+                dropDownStyle={{justifyContent: "center", alignItems: "center"}}
+                activeLabelStyle={{color: 'red'}}
+                labelStyle={{fontWeight: "bold"}}
+                onChangeItem={item => {setSubOption(item.value)}}
+            />
+            
+            {!loading && <Menu type="menu" data={menus} status={option} subStatus={subOption} />}
         </View>
-        <View style={{flex:1, justifyContent:'center', alignContent:'center',alignItems:'center'}}>
-        <TouchableOpacity onPress={()=>isMenu(false)} style={{ width: width * 0.5, justifyContent:'center', alignContent:'center',alignItems:'center'}} >
-            <Text style={{color:!menu ? '#ED2124' : 'black'}}>
-                Thali 
-            </Text>
-        </TouchableOpacity>
-        </View>
-    </View>
-
- }
-    {menu &&  !loading && <Menu type="menu" data={menus} />}
-
-    
-    {!menu && !loading && <Menu type="thali" data={thali} />}
- 
+        }
+        </ScrollView>}
+        {!loading && <ScrollView style={{position:'absolute', backgroundColor:'white',width:width, borderTopRightRadius:10, borderTopLeftRadius:20,top:'90%',elevation:2}}>
+            <View style={{paddingVertical:20, marginBottom:20, padding: 10}}>
+                <View style={{width: width, justifyContent: "center", paddingEnd: 20 }}>
+                    <Button label="View Cart" bgColor="#a00030" textColor="white" clickEvent={()=>{navigation.navigate("Cart")}}  />
+                </View>
+            </View>
         </ScrollView>}
         </>
     )

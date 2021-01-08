@@ -16,25 +16,14 @@ const Orders = ({ type, navigation, getOrders }) => {
     const fetchOrder = async () => {
         const user = await AsyncStorage.getItem('user');
         console.log(user)
-        const param = {"cust_id": JSON.parse(user).cust_id, "org_id": JSON.parse(user).org_name};
+        const param = {"customerid": JSON.parse(user).customerid,};
         console.log(param)
         const response = await getOrders(param);
         console.log(response.data)
         if(response.success) {
-            setOrders(response.data)
+            setOrders(response.menulist)
         }
     }
-    // useEffect(() => {
-    //     const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-    //     return () => {
-    //       backHandler.remove();
-    //     };
-    //   }, []);
-
-    //   function handleBackButtonClick() {
-    //     navigation.goBack();
-    //     return true;
-    // }
 
     return (
        <>
@@ -52,21 +41,21 @@ const Orders = ({ type, navigation, getOrders }) => {
                     <View style={{flex: 1, justifyContent:"space-between"}}>
                         <View style={{flex: 1, marginBottom: 5}}>
                             <Text style={{fontWeight:'bold', flex:1.5}}>
-                                {item.itemname}
+                                {item.item}
                             </Text>
                             <Text style={{flex:1}}>
                                 {item.delivery_address}
                             </Text>
                             <Text style={{flex:1}}>
-                                {item.cr_date}
+                                {item.datetime}
                             </Text>
                         </View>
                         <View style={{flex: 1}}>
                             <Text style={{flex:1, fontWeight: 'bold'}}>
-                                Rs. {item.amount*item.itemcount}/-
+                                Rs. {item.price}/-
                             </Text>
                             <Text style={{flex:1}}>
-                                Order#: {item.order_id}
+                                Order#: {item.orderid}
                             </Text>
                         </View>
                     </View>

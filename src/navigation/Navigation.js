@@ -21,6 +21,8 @@ import Health from '../screens/Health';
 import Orders from '../screens/Orders';
 import Venderlist from '../screens/Venderlist';
 import Qrcode from '../screens/Qrcode';
+import ForgotPassword from '../screens/Forgotpassword';
+import Wallet from '../screens/Wallet'
 
 import Drawer from '../components/Drawer';
 
@@ -28,16 +30,63 @@ import Drawer from '../components/Drawer';
 const UiStack = createStackNavigator();
 const UiDrawer = createDrawerNavigator();
 
+// const DrawerNavigator = ({ navigation, isLoggedIn }) => isLoggedIn ? (
+//     <UiDrawer.Navigator  drawerPosition="right" drawerContent={(props) => <Drawer {...props} />}>
+//         <UiDrawer.Screen name='Home' component={Home} />
+//         <UiDrawer.Screen name="Venderlist" component={Venderlist} />
+//         <UiDrawer.Screen name='Health' component={Health} />
+//         <UiDrawer.Screen name='Report' component={Report} />
+//         <UiDrawer.Screen name='Login' component={Login} options={{swipeEnabled: false}} />
+//         <UiDrawer.Screen name='Register' component={Register} options={{swipeEnabled: false}} />
+//         <UiDrawer.Screen name='Search' component={Search} />
+//         <UiDrawer.Screen name='Cart' component={Cart} />
+//         <UiDrawer.Screen name='Wallet' component={Wallet} />
+//         <UiDrawer.Screen name='OrderSuccess' component={OrderSuccess} />
+//         <UiDrawer.Screen name='Feedback' component={Feedback} />
+//         <UiDrawer.Screen name='OrderStatus' component={OrderStatus} />
+//         <UiDrawer.Screen name='CategoryItems' component={CategoryItems} />
+//         <UiDrawer.Screen name='CafeDensity' component={CafeDensity} />
+//         <UiDrawer.Screen name='Orders' component={Orders} />
+//         <UiDrawer.Screen name='Qrcode' component={Qrcode} />
+//         <UiDrawer.Screen name="Venderlis" component={Venderlist} />
+
+//         <UiDrawer.Screen name='ForgotPassword' component={ForgotPassword} options={{swipeEnabled: false}} />
+//     </UiDrawer.Navigator>
+// )  : (
+//     <UiDrawer.Navigator  drawerPosition="right" drawerContent={(props) => <Drawer {...props} />}>
+//         <UiDrawer.Screen name='Login' component={Login} options={{swipeEnabled: false}}/>
+//         <UiDrawer.Screen name='Home' component={Home} />
+//         <UiDrawer.Screen name="Venderlist" component={Venderlist} />
+//         <UiDrawer.Screen name='Health' component={Health} />
+//         <UiDrawer.Screen name='Report' component={Report} />
+//         <UiDrawer.Screen name='Register' component={Register} options={{swipeEnabled: false}}/>
+//         <UiDrawer.Screen name='Search' component={Search} />
+//         <UiDrawer.Screen name='Cart' component={Cart} />
+//         <UiDrawer.Screen name='Wallet' component={Wallet} />
+//         <UiDrawer.Screen name='OrderSuccess' component={OrderSuccess} />
+//         <UiDrawer.Screen name='Feedback' component={Feedback} />
+//         <UiDrawer.Screen name='OrderStatus' component={OrderStatus} />
+//         <UiDrawer.Screen name='CategoryItems' component={CategoryItems} />
+//         <UiDrawer.Screen name='CafeDensity' component={CafeDensity} />
+//         <UiDrawer.Screen name='Orders' component={Orders} />
+//         <UiDrawer.Screen name='Qrcode' component={Qrcode} />
+//         <UiDrawer.Screen name="Venderlis" component={Venderlist} />
+
+//         <UiDrawer.Screen name='ForgotPassword' component={ForgotPassword} options={{swipeEnabled: false}} />
+//     </UiDrawer.Navigator>
+// )
+
 const DrawerNavigator = ({ navigation, isLoggedIn }) => isLoggedIn ? (
     <UiDrawer.Navigator  drawerPosition="right" drawerContent={(props) => <Drawer {...props} />}>
+        <UiDrawer.Screen name='Home' component={Home} />
         <UiDrawer.Screen name="Venderlist" component={Venderlist} />
         <UiDrawer.Screen name='Health' component={Health} />
         <UiDrawer.Screen name='Report' component={Report} />
-        <UiDrawer.Screen name='Home' component={Home} />
         <UiDrawer.Screen name='Login' component={Login} />
         <UiDrawer.Screen name='Register' component={Register} />
         <UiDrawer.Screen name='Search' component={Search} />
         <UiDrawer.Screen name='Cart' component={Cart} />
+        <UiDrawer.Screen name='Wallet' component={Wallet} />
         <UiDrawer.Screen name='OrderSuccess' component={OrderSuccess} />
         <UiDrawer.Screen name='Feedback' component={Feedback} />
         <UiDrawer.Screen name='OrderStatus' component={OrderStatus} />
@@ -46,49 +95,18 @@ const DrawerNavigator = ({ navigation, isLoggedIn }) => isLoggedIn ? (
         <UiDrawer.Screen name='Orders' component={Orders} />
         <UiDrawer.Screen name='Qrcode' component={Qrcode} />
         <UiDrawer.Screen name="Venderlis" component={Venderlist} />
+
+        <UiDrawer.Screen name='ForgotPassword' component={ForgotPassword} />
     </UiDrawer.Navigator>
 )  : (
     <UiStack.Navigator headerMode='none'>
         <UiStack.Screen name='Login' component={Login} />
         <UiStack.Screen name='Register' component={Register} />
-        <UiStack.Screen name="Venderlist" component={Venderlist} />
+        <UiStack.Screen name='ForgotPassword' component={ForgotPassword} />
+        <UiStack.Screen name='Home' component={Home} />
     </UiStack.Navigator>
 )
 
-const UiNavigator = ({ navigation, isLoggedIn }) => isLoggedIn ? (
-    <UiStack.Navigator headerMode='none'>
-        <UiStack.Screen name="Venderlist" component={DrawerNavigator} />
-        <UiStack.Screen name='Home' component={Home} />
-        <UiStack.Screen name='Login' component={Login} />
-        <UiStack.Screen name='Register' component={Register} />
-        <UiStack.Screen name='Search' component={Search} />
-        <UiStack.Screen name='Cart' component={Cart} />
-        <UiStack.Screen name='OrderSuccess' component={OrderSuccess} />
-        <UiStack.Screen name='Feedback' component={Feedback} />
-        <UiStack.Screen name='OrderStatus' component={OrderStatus} />
-        <UiStack.Screen name='CategoryItems' component={CategoryItems} />
-        <UiStack.Screen name='CafeDensity' component={CafeDensity} />
-        <UiStack.Screen name='Orders' component={Orders} />
-        <UiStack.Screen name="Venderlis" component={Venderlist} />
-    </UiStack.Navigator>
-) : (
-    <UiStack.Navigator headerMode='none'>
-        <UiStack.Screen name='Login' component={Login} />
-        <UiStack.Screen name='Register' component={Register} />
-        <UiStack.Screen name='Home' component={Home} />
-        <UiStack.Screen name="Venderlist" component={Venderlist} />
-        <UiStack.Screen name='Search' component={Search} />
-        <UiStack.Screen name='Cart' component={Cart} />
-        <UiStack.Screen name='OrderSuccess' component={OrderSuccess} />
-        <UiStack.Screen name='Feedback' component={Feedback} />
-        <UiStack.Screen name='OrderStatus' component={OrderStatus} />
-        <UiStack.Screen name='Report' component={Report} />
-        <UiStack.Screen name='CategoryItems' component={CategoryItems} />
-        <UiStack.Screen name='CafeDensity' component={CafeDensity} />
-        <UiStack.Screen name='Health' component={Health} />
-        <UiStack.Screen name='Orders' component={Orders} />
-    </UiStack.Navigator>
-)
 
 const Navigation = ({isLoggedIn}) => (
     <NavigationContainer>
@@ -96,6 +114,4 @@ const Navigation = ({isLoggedIn}) => (
     </NavigationContainer>
     )
     
-  
-    
-    export default Navigation
+export default Navigation

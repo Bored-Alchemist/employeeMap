@@ -13,17 +13,6 @@ const Cart = ({ navigation, createOrder }) => {
     const [deliveryAmount, setTotalPrice] = useState(0);
     const [subTotal, setSubTotal] = useState(0);
 
-    // useEffect(() => {
-    //     const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-    //     return () => {
-    //       backHandler.remove();
-    //     };
-    //   }, []);
-
-    //   function handleBackButtonClick() {
-    //     navigation.navigate('Home');
-    //     return true;
-    // }
 
     useEffect(()=>{
         showCart();
@@ -35,7 +24,7 @@ const Cart = ({ navigation, createOrder }) => {
             setItem(JSON.parse(isExist));
             let v_amount = 0;
             JSON.parse(isExist).map(v => {
-                v_amount = v_amount + (parseInt(v.dish_price) * v.quantity);
+                v_amount = v_amount + (parseInt(v.price) * v.quantity);
             });
             setSubTotal(v_amount)
         } else {
@@ -105,7 +94,7 @@ const Cart = ({ navigation, createOrder }) => {
                 foodname.push( v.item_id);
                 dishcount.push(v.quantity);
             });
-            const userDishes = {foodname, dishcount, totalprice: deliveryAmount + subTotal, cust_id: JSON.parse(user).cust_id};
+            const userDishes = {foodname, dishcount, totalprice: deliveryAmount + subTotal, customerid: JSON.parse(user).customerid};
             console.log(userDishes)
             const response = await createOrder(userDishes);
             console.log('api response ==++++++++++>',response);
@@ -122,30 +111,30 @@ const Cart = ({ navigation, createOrder }) => {
         <>
         <ScrollView style={{
             flex: 1,
-            backgroundColor:'white'
+            backgroundColor:'#f0f0f0'
         }}>
             <Header navigation={navigation} />
 
 
-            <View style={{...styles.deliveryAddress}}>
+            <View style={{...styles.deliveryAddress, backgroundColor: "#f0f0f0"}}>
             
             {item && item.length > 0 && item.map((cart, index) => 
-            <View key={index} style={{display:'flex', flexDirection:'row',flex:1,marginLeft:0,  marginRight:0, marginTop:5 }}>
+            <View key={index} style={{display:'flex', flexDirection:'row',flex:1,marginLeft:0,  marginRight:0, marginTop:5, backgroundColor: "#f0f0f0" }}>
                         <View style={{height: width * 0.3, width: width* 0.3}}>
-                            <Image source={{ uri: 'http://food.breeur.in/'+cart.menu_img }} style={{height: width * 0.3, width: width* 0.3, borderRadius:5}} />
+                            <Image source={{ uri: cart.menuimage }} style={{height: width * 0.3, width: width* 0.3, borderRadius:5}} />
                         </View>
                         <View style={{flex:1, marginLeft:20,}}>
                             <Text style={{fontSize: 20, fontWeight: 'normal', marginBottom: 5 }}>
-                                {cart.type=='menu'?cart.dish_name : cart.thali_name}
+                                {cart.type=='menu'?cart.name : cart.thali_name}
                             </Text>
                             <Text style={{color: 'grey', marginBottom: 5}}>
-                                {cart.type=='menu'?cart.menu_category: cart.dish_include}
+                                {cart.type=='menu'?cart.menucategory: cart.dish_include}
                             </Text>
                             
                             <View style={{display:'flex', flexDirection:'row', alignContent: 'flex-end', justifyContent: 'space-between', marginTop: 25}}>
                                 <View style={{flexDirection:'row', alignItems: 'center'}}>
                                 <Text style={{fontSize: 16, fontWeight: 'bold'}}>
-                                    Rs. {parseInt(cart.dish_price) * cart.quantity}
+                                    Rs. {parseInt(cart.price) * cart.quantity}/-
                                 </Text>
                                 </View>
                                 <View style={{flexDirection:'row', alignItems: 'center'}}>
@@ -167,13 +156,13 @@ const Cart = ({ navigation, createOrder }) => {
                         
             </View>
         </ScrollView>
-        <ScrollView style={{flex:1,position:'absolute', backgroundColor:'white',width:width, borderTopRightRadius:20, borderTopLeftRadius:20, top:'75%',elevation:2}}>
-            <View style={{paddingVertical:20, marginBottom:50, padding: 10}}>
+        <ScrollView style={{flex:1,position:'absolute', backgroundColor:'white',width:width, borderTopRightRadius:20, borderTopLeftRadius:20, top:'79%',elevation:2}}>
+            <View style={{paddingVertical:20, marginBottom:20, padding: 10}}>
                 <View style={{display:'flex', flexDirection:'row',}}>
                     <Text style={{fontSize:16, flex:1, marginBottom: 5, fontWeight: "bold"}}>
                         Items Selected
                     </Text>
-                    <Text style={{fontWeight: "bold"}}>
+                    <Text style={{fontWeight: "bold", fontSize: 16}}>
                         {item.length > 0 ? item.length : 0}
                     </Text>
                 </View>
@@ -186,18 +175,10 @@ const Cart = ({ navigation, createOrder }) => {
                     </Text>
                 </View>
                 <View style={{display:'flex', flexDirection:'row', marginBottom: 5}}>
-                    <Text style={{fontSize:16, flex:1}}>
-                        Delivery Fee
-                    </Text>
-                    <Text>
-                        Rs. {deliveryAmount}
-                    </Text>
-                </View>
-                <View style={{display:'flex', flexDirection:'row', marginBottom: 5}}>
                     <Text style={{fontWeight:'bold', fontSize:16, flex:1}}>
                         Total
                     </Text>
-                    <Text>
+                    <Text style={{fontWeight:'bold', fontSize:16}}>
                         Rs. {subTotal + deliveryAmount}
                     </Text>
                 </View>

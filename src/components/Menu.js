@@ -9,10 +9,11 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {showToast} from '../action/auth';
 
- const Menu = ({ data, type, navigation, showToast }) => {
+ const Menu = ({ data, type, navigation, showToast, status, subStatus }) => {
 
     const addToCart = async (item) => {
         const isExist = await AsyncStorage.getItem('cart');
+        console.log(typeof(status))
         if(JSON.parse(isExist) && JSON.parse(isExist).length > 0) {
             let itemExists = JSON.parse(isExist).find(v => (type == 'menu') ? v.item_id ==  item.menuid : v.item_id == item.thali_id );
             if(itemExists) {
@@ -28,24 +29,30 @@ import {showToast} from '../action/auth';
             showToast('success', 'Item added to cart!')
         }
     }
+
     return (
        <>
-       {data && data.length > 0 && data.map((item,index) =>
-        <View key={index} style={styles.card}>
-    <View style={{display:'flex', flexDirection:'row',flex:1, borderBottomColor:'lightgrey',borderBottomWidth:1,backgroundColor:'#f0f0f0',
-    elevation:2, height: width * 0.3 }}>
+       {data && data.length > 0  && data.map((item,index) => {
+           if(item.menutype === "veg" && status === "Pure Veg" && item.menucategory === subStatus){
+            return (
+                <View key={index} style={styles.card}>
+                    <View style={{display:'flex', flexDirection:'row',flex:1, borderBottomColor:'lightgrey',borderBottomWidth:1,backgroundColor:'#f0f0f0',
+                    elevation:2, height: width * 0.3 }}>
                         <View style={{ height: width * 0.3 , width : width * 0.3}}>
-                            <Image source={{ uri: 'http://food.breeur.in/'+item.menu_img }} style={{height: width * 0.3, width: width * 0.3, borderRadius:5}} />
+                            <Image source={{ uri: item.menuimage }} style={{height: width * 0.3, width: width * 0.3, borderRadius:5}} />
                         </View>
                         <View style={{flex:1, marginLeft:20,paddingHorizontal:10,paddingVertical:10,}}>
-                        <Text style={{fontWeight:'bold'}}>
-                                {type=='menu'?item.dish_name : item.thali_name}
+                            <Text style={{fontWeight:'bold'}}>
+                                {item.name}
                             </Text>
                             <Text>
-                                {type=='menu'?item.menu_category: item.dish_include}
+                                {item.menucategory}
                             </Text>
                             <Text>
-                                Rs. {item.dish_price}
+                                {item.menutype}
+                            </Text>
+                            <Text>
+                                Rs. {item.price}
                             </Text>
                         </View>
                         <View  style={{justifyContent:'center',alignContent:'center',alignItems:'center', marginRight: 20,}}>
@@ -55,10 +62,43 @@ import {showToast} from '../action/auth';
                                 </Text>
                             </TouchableOpacity>
                         </View>
-
                     </View>
-    </View>
-    
+                </View>
+            )
+        }else if(item.menutype === "nonveg" && status === "Non-veg" && item.menucategory === subStatus ){
+            return (
+                <View key={index} style={styles.card}>
+                    <View style={{display:'flex', flexDirection:'row',flex:1, borderBottomColor:'lightgrey',borderBottomWidth:1,backgroundColor:'#f0f0f0',
+                    elevation:2, height: width * 0.3 }}>
+                        <View style={{ height: width * 0.3 , width : width * 0.3}}>
+                            <Image source={{ uri: item.menuimage }} style={{height: width * 0.3, width: width * 0.3, borderRadius:5}} />
+                        </View>
+                        <View style={{flex:1, marginLeft:20,paddingHorizontal:10,paddingVertical:10,}}>
+                            <Text style={{fontWeight:'bold'}}>
+                                {item.name}
+                            </Text>
+                            <Text>
+                                {item.menucategory}
+                            </Text>
+                            <Text>
+                                {item.menutype}
+                            </Text>
+                            <Text>
+                                Rs. {item.price}
+                            </Text>
+                        </View>
+                        <View  style={{justifyContent:'center',alignContent:'center',alignItems:'center', marginRight: 20,}}>
+                            <TouchableOpacity onPress={()=>addToCart(item)}>
+                                <Text style={{backgroundColor: "#a00030", borderRadius:10, padding:10, color:'white'}}>
+                                    Add to Cart
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            )
+        }
+       }
     )}
     </>
     )

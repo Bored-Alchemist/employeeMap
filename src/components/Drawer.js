@@ -10,6 +10,9 @@ const Drawer = ({navigation}) => {
     const grey = "#cfd8dc";
     const userInfo = useContext(userData);
     const [userName, setUserName] = useState("");
+    const [userOrgName, setUserOrgName] = useState("");
+    const [userMail, setMail] = useState("");
+    const [userID, setUserID] = useState("");
     const [modalVisible, setModalVisible] = useState(false);
     const logoutUser = async () => {
         setModalVisible(false);
@@ -22,14 +25,16 @@ const Drawer = ({navigation}) => {
     const user = async () => {
         const okk = await AsyncStorage.getItem("user");
         const userj = JSON.parse(okk);
-        setUserName(userj.name.toUpperCase())
+        setUserName(userj.customername.toUpperCase())
+        setUserOrgName(userj.customerorgname)
+        setMail(userj.cusomeremail)
+        setUserID(userj.customerid)
         console.log(userName)
     }
 
     useEffect(() => {
         user();
     }, [])
-    
     
     return (
         <View style={styles.mainContainer}>
@@ -41,7 +46,12 @@ const Drawer = ({navigation}) => {
             <DrawerContentScrollView>
                 
                 <View style={styles.userArea}>
-                    <Text style={{fontSize: 25, fontWeight: 'bold', color: 'grey'}} >{userName}</Text>
+                    <Text onPress={() => navigation.navigate("Home")} style={{fontSize: 23, fontWeight: 'bold'}} >
+                        {userName}
+                    </Text>
+                    <Text>{userOrgName}</Text>
+                    <Text>{userMail}</Text>
+                    <Text>{`Customer #`}{userID}</Text>
                 </View>
                 <View style={styles.drawerListSection}>
                     <View style={{flex: 1}}>
@@ -49,8 +59,12 @@ const Drawer = ({navigation}) => {
                         <Text style={styles.listText}>Health Tracker</Text>
                         <Ionicons name="ios-arrow-forward" size={30} color={grey} />
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.list} onPress={() => {}}>
+                        <TouchableOpacity style={styles.list} onPress={() => navigation.navigate("Wallet")}>
                         <Text style={styles.listText}>Wallet</Text>
+                        <Ionicons name="ios-arrow-forward" size={30} color={grey} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.list} onPress={() => navigation.navigate("Orders")}>
+                        <Text style={styles.listText}>Orders</Text>
                         <Ionicons name="ios-arrow-forward" size={30} color={grey} />
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.list} onPress={() => navigation.navigate("Report")}>

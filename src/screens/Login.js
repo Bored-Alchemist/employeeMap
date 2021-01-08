@@ -5,15 +5,16 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 import { height, width } from '../assets/dimensions';
 import { connect } from 'react-redux';
-import { login } from '../action/auth2';
+import { newlogin } from '../action/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loader from '../components/Loader';
 import Eating from '../assets/icons/Eating';
+import axios from 'axios';
 
-const Login = ({ navigation, login }) => {
+const Login = ({ navigation, newlogin }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [ form, setForm ] = useState({
-        email: '', password: ''
+        username: '', password: ''
     });
     const [loading, isLoading] = useState(false);
     const changeInput = (e, name) => {
@@ -36,18 +37,19 @@ const Login = ({ navigation, login }) => {
 
     const loginUser = async () => {
       isLoading(true);
-        const response = await login(form);
+        const response = await newlogin(form);
         if(response.success) {
-            AsyncStorage.setItem('user', JSON.stringify(response.data))
+          console.log("success")
+            AsyncStorage.setItem('user', JSON.stringify(response))
             setForm({
-                mobile: '', otp: ''
+                username: '', password: ''
             });
-            navigation.navigate('Venderlist')
+            navigation.navigate('Home')
         }
         isLoading(false);
     }
 
-    const { email, password } = form;
+    const { username, password } = form;
     return (
       <>
       {loading && <Loader />}
@@ -60,7 +62,7 @@ const Login = ({ navigation, login }) => {
             </View>
                 <View style={styles.formContainer}>
                   <View style={{marginVertical: 5}}>
-                    <Input changeInput={changeInput} value={email} name='email' placeholder="Username" />
+                    <Input changeInput={changeInput} value={username} name='username' placeholder="Username" />
                   </View>
                     
                 <View style={{marginVertical: 5}}>
@@ -71,7 +73,7 @@ const Login = ({ navigation, login }) => {
                 </View>
                 
                 <View style={{ justifyContent:'flex-end', alignItems:'flex-end', alignContent:'center',marginBottom:10}}>
-                    <Text style={{fontSize:14}}>
+                    <Text style={{fontSize:14}} onPress={() => navigation.navigate('ForgotPassword')}>
                         Forgot Password ?
                     </Text>
                 </View>
@@ -200,6 +202,6 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps, {
-        login
+        newlogin
     }
 ) (Login)

@@ -37,7 +37,7 @@ const OrderSuccess = ({ navigation }) => {
                     </Text>
             </View>
             <View style={{flex:1, paddingHorizontal:20}}>
-                <Button label="Take Order" clickEvent={()=>navigation.navigate('Feedback')} />
+                <Button label="Give Feedback" clickEvent={()=>navigation.navigate('Feedback')} />
                 <View style={{flex:1,marginTop:20}}>
                 <Button label="Continue Shopping" bgColor="#a00030" textColor="white" clickEvent={()=>navigation.navigate('Home')} />
             </View>
