@@ -57,16 +57,36 @@ const ForgotPassword = ({ navigation, forgotpassword }) => {
               </View>
                   <View style={styles.formContainer}>
                     <View style={{marginVertical: 5}}>
-                      <Input changeInput={changeInput} value={username} name='username' placeholder="Email" />
+                      <Input changeInput={changeInput} value={username} name='username' placeholder="Email" icon="user" library="FontAwesome"  />
                     </View>
                       
                   <View style={{marginVertical: 5}}>
                   <Button label="Sent Reset Link" bgColor={red} textColor="white" clickEvent={()=>loginUser()}  />
                   </View>
               </View>
-              <View style={{justifyContent:'center', alignItems:'center', alignContent:'center', height: height * 0.45, backgroundColor: "#f0f0f0"}}>
+              <View style={{ paddingHorizontal: width * 0.07,paddingBottom:20 }}>
+                <View style={{marginTop:20, justifyContent:'center', alignItems:'center', alignContent:'flex-end',marginBottom:10}}>
+                    <Text style={{fontSize:16}}>
+                        {` `}
+                    </Text>
+                    <Text style={{fontSize:16, fontWeight: "bold"}} onPress={()=>navigation.navigate('Register')}>
+                        {` `}
+                    </Text>
+                </View>
+            </View>
+              <View style={{justifyContent:'center', alignItems:'center', alignContent:'center', height: height * 0.35, backgroundColor: "#f0f0f0"}}>
                   <Image source={require('../assets/forgot.png')} style={{width: width * 0.7}} resizeMode='contain' />
               </View>
+              <View style={{ paddingHorizontal: width * 0.07,paddingBottom:20 }}>
+                <View style={{marginTop:20, justifyContent:'center', alignItems:'center', alignContent:'flex-end',marginBottom:10}}>
+                    <Text style={{fontSize:16}}>
+                        The App Managed By
+                    </Text>
+                    <Text style={{fontSize:16, fontWeight: "bold"}} >
+                        Digital Cafeteria Solutions Pvt. Ltd.
+                    </Text>
+                </View>
+            </View>
           </View>
            </View>}
            </>

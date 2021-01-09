@@ -28,16 +28,43 @@ import ProgressCircle from 'react-native-progress-circle'
             <View style={styles.slider}>
                 <SliderBox
                     images={img}
+                    sliderBoxHeight={175}
+                    parentWidth={width*0.9}
+                    onCurrentImagePressed={index => console.log(`image ${index} pressed`)}
+                    dotColor="#a00030"
+                    inactiveDotColor="#90A4AE"
+                    paginationBoxVerticalPadding={20}
+                    autoplay
+                    circleLoop
+                    resizeMethod={'resize'}
+                    resizeMode={'cover'}
+                    paginationBoxStyle={{
+                        position: "absolute",
+                        bottom: 0,
+                        padding: 0,
+                        alignItems: "center",
+                        alignSelf: "center",
+                        justifyContent: "center",
+                        paddingVertical: 10
+                    }}
+                    ImageComponentStyle={{borderRadius: 15}}
+                    imageLoadingColor="#2196F3"
+                    />
+            </View>
+            
+                {/* <SliderBox
+                    images={img}
                     sliderBoxHeight={300}
                     onCurrentImagePressed={index =>
                         console.warn(`image ${index} pressed`)
                     }
-                    parentWidth={width * 0.9}
                     autoplay={true}
-                    ImageComponentStyle={{borderRadius: 15, width: '97%', marginTop: 5}}
+                    circleLoop={true}
+                    paginationBoxStyle={{borderRadius: 15}}
+                    ImageComponentStyle={{borderRadius: 15, marginTop: 5}}
                     
-                />
-            </View>
+                /> */}
+            
             <View>
                 <View style={styles.card}>
                     <View style={{flexDirection: "column", alignContent: "space-around"}}>
@@ -63,8 +90,8 @@ import ProgressCircle from 'react-native-progress-circle'
             </View>
             <View>
                 <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('Venderlist')}>
-                <Text style={{textAlign:'center', color: 'black', fontSize:18, fontWeight: "bold"}}>
-                        Live & Menu
+                    <Text style={{textAlign:'center', color: 'black', fontSize:18, fontWeight: "bold"}}>
+                        Live Menu
                     </Text>
                     <Image source={require('../assets/pngs/Image07.png')} resizeMode="contain" style={{width: 100}} />
                 </TouchableOpacity>
@@ -72,7 +99,7 @@ import ProgressCircle from 'react-native-progress-circle'
 
             <View>
                 <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('Cart')}>
-                <Text style={{textAlign:'center', color: 'black',fontSize:18, fontWeight: "bold"}}>
+                    <Text style={{textAlign:'center', color: 'black',fontSize:18, fontWeight: "bold"}}>
                         Order Food
                     </Text>
                     <Image source={require('../assets/pngs/Image08.png')} resizeMode="contain" style={{width: 100}} />
@@ -81,10 +108,10 @@ import ProgressCircle from 'react-native-progress-circle'
 
             <View >
                 <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('Orders')}>
-                <Text style={{textAlign:'center', color: 'black',fontSize:18, fontWeight: "bold"}}>
-                        Meal tracker
+                    <Text style={{textAlign:'center', color: 'black',fontSize:18, fontWeight: "bold"}}>
+                        Meal Status
                     </Text>
-                    <Image source={require('../assets/pngs/Image09.png')} resizeMode="contain" style={{width: 100}} />
+                    <Image source={require('../assets/status.png')} resizeMode="contain" style={{width: 100}} />
                     </TouchableOpacity>
             </View>
         </View>
@@ -131,7 +158,7 @@ const styles = StyleSheet.create({
         alignContent:'center',
         height: 175, 
         width: width * 0.9, 
-        borderRadius: 10 ,
+        borderRadius: 15 ,
         backgroundColor: '#f0f0f0',
         elevation: 2,
     }

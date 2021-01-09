@@ -69,15 +69,26 @@ import Button from '../components/Button';
                     {label: 'Pure Veg', value: 'Pure Veg'},
                     {label: 'Non-Veg', value: 'Non-veg'},
                 ]}
+                style={{
+                    color: '#000',
+                }}
+                labelStyle={{
+                    color: '#fff',
+                }}
                 defaultValue={option}
                 onOpen={() => setMar(80)}
                 onClose={() => setMar(0)}
-                containerStyle={{marginBottom: mar,marginHorizontal: 20, marginVertical: 5,}}
+                containerStyle={{marginBottom: mar,marginHorizontal: 20, marginVertical: 5}}
                 style={{backgroundColor: "#a00030",  justifyContent: "center", alignItems: "center"}}
                 dropDownStyle={{justifyContent: "center", alignItems: "center"}}
                 activeLabelStyle={{color: 'red'}}
+                activeItemStyle={{color: "white"}}
                 labelStyle={{fontWeight: "bold"}}
                 onChangeItem={item => {setOption(item.value)}}
+                placeholderStyle={{color: "white"}}
+                selectedLabelStyle={{color: "white"}}
+                arrowStyle={{borderWidth: 0.5, borderColor: "white", paddingHorizontal: 9, paddingVertical: 4, borderRadius: 3}}
+                arrowColor="white"
             />
             <DropDownPicker
                 items={[
@@ -92,19 +103,23 @@ import Button from '../components/Button';
                 defaultValue={subOption}
                 onOpen={() => setMar2(150)}
                 onClose={() => setMar2(0)}
+                selectedLabelStyle={{color: "white"}}
                 containerStyle={{marginBottom: mar2,marginHorizontal: 20, marginVertical: 5,}}
                 style={{backgroundColor: "#a00030",  justifyContent: "center", alignItems: "center"}}
                 dropDownStyle={{justifyContent: "center", alignItems: "center"}}
                 activeLabelStyle={{color: 'red'}}
                 labelStyle={{fontWeight: "bold"}}
                 onChangeItem={item => {setSubOption(item.value)}}
+                arrowStyle={{borderWidth: 0.5, borderColor: "white", paddingHorizontal: 9, paddingVertical: 4, borderRadius: 3}}
+                arrowColor="white"
+                selectedLabelStyle={{color: "white"}}
             />
             
             {!loading && <Menu type="menu" data={menus} status={option} subStatus={subOption} />}
         </View>
         }
         </ScrollView>}
-        {!loading && <ScrollView style={{position:'absolute', backgroundColor:'white',width:width, borderTopRightRadius:10, borderTopLeftRadius:20,top:'90%',elevation:2}}>
+        {!loading && <ScrollView style={{position:'absolute', backgroundColor:'white',width:width, top:'90%',elevation:2}}>
             <View style={{paddingVertical:20, marginBottom:20, padding: 10}}>
                 <View style={{width: width, justifyContent: "center", paddingEnd: 20 }}>
                     <Button label="View Cart" bgColor="#a00030" textColor="white" clickEvent={()=>{navigation.navigate("Cart")}}  />

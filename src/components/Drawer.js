@@ -71,7 +71,7 @@ const Drawer = ({navigation}) => {
                         <Text style={styles.listText}>Reports</Text>
                         <Ionicons name="ios-arrow-forward" size={30} color={grey} />
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.list} onPress={() => {setModalVisible(true)}}>
+                        <TouchableOpacity style={{...styles.list, borderBottomWidth: 1}} onPress={() => {setModalVisible(true)}}>
                         <Text style={styles.listText}>Logout</Text>
                         <Ionicons name="ios-arrow-forward" size={30} color={grey} />
                         </TouchableOpacity>
@@ -79,7 +79,8 @@ const Drawer = ({navigation}) => {
                 </View>
             </DrawerContentScrollView>
             <View style={{justifyContent: "center", alignItems: "center"}}>
-                <Image source={require('../assets/pngs/Logo02.png')} resizeMode="contain" style={{width: width * 0.5}} />
+                <Image source={require('../assets/pngs/Logo02.png')} resizeMode="contain" style={{width: width * 0.4}} />
+                <Text style={{textAlign: "center"}}>www.thefooods.com</Text>
             </View>
             <Modal
                 animationType="slide"
@@ -136,14 +137,18 @@ const styles = StyleSheet.create({
     },
     drawerListSection: {
         flex: 1,
+        marginTop: 20
     },
     list:{
-        width: width * 0.7 ,
-        height: 50,
+        width: width ,
+        height: 70,
         justifyContent: "space-between",
         flexDirection: 'row',
         alignItems: "center",
-        marginVertical: 5
+        paddingVertical: 5,
+        borderTopColor: "grey",
+        borderTopWidth: 1,
+        borderBottomColor: "grey",
     },
     listText: {
         fontSize: 20,

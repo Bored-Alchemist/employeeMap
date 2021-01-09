@@ -44,10 +44,10 @@ const Health = ({ navigation, getCalories }) => {
                 <View>
                     <TouchableOpacity style={{...styles.card}}>
                         <View style={{flexDirection: "row", alignContent: "space-around", flex: 1, width: width * 0.8}}>
-                            <View style={{display: "flex", height: 25, elevation: 12}} >
-                                <Text style={{textAlign:'center', color: 'black', fontSize:20, fontWeight: "bold"}}>{cal ? cal.calories : 0}{` `} </Text>
+                            <View style={styles.innerCard} >
+                                <Text style={styles.innerCardFont}>{cal ? cal.calories : 0}{` `} </Text>
                             </View>
-                            <Text style={{color: 'black', fontSize:22, fontWeight: "bold"}}>
+                            <Text style={{color: 'black', fontSize:20, fontWeight: "bold"}}>
                                 Calories
                             </Text>
                         </View>
@@ -61,10 +61,10 @@ const Health = ({ navigation, getCalories }) => {
             <View>
                     <TouchableOpacity style={{...styles.card}}>
                         <View style={{flexDirection: "row", alignContent: "space-around", flex: 1, width: width * 0.8}}>
-                            <View style={{display: "flex", height: 25, elevation: 12}} >
-                                <Text style={{textAlign:'center', color: 'black', fontSize:20, fontWeight: "bold"}}>{cal ? cal.carbs : 0}{` `} </Text>
+                            <View style={styles.innerCard} >
+                                <Text style={styles.innerCardFont}>{cal ? cal.carbs : 0}{`g`} </Text>
                             </View>
-                            <Text style={{color: 'black', fontSize:22, fontWeight: "bold"}}>
+                            <Text style={{color: 'black', fontSize:20, fontWeight: "bold"}}>
                                 Carbs
                             </Text>
                         </View>
@@ -78,10 +78,10 @@ const Health = ({ navigation, getCalories }) => {
             <View>
                     <TouchableOpacity style={{...styles.card}}>
                         <View style={{flexDirection: "row", alignContent: "space-around", flex: 1, width: width * 0.8}}>
-                            <View style={{display: "flex", height: 25, elevation: 12}} >
-                                <Text style={{textAlign:'center', color: 'black', fontSize:20, fontWeight: "bold"}}>{cal ? cal.fats : 0}{` `} </Text>
+                            <View style={styles.innerCard} >
+                                <Text style={styles.innerCardFont}>{cal ? cal.fats : 0}{`g`} </Text>
                             </View>
-                            <Text style={{color: 'black', fontSize:22, fontWeight: "bold"}}>
+                            <Text style={{color: 'black', fontSize:20, fontWeight: "bold"}}>
                                 Total Fats
                             </Text>
                         </View>
@@ -95,10 +95,10 @@ const Health = ({ navigation, getCalories }) => {
             <View>
                     <TouchableOpacity style={{...styles.card}}>
                         <View style={{flexDirection: "row", alignContent: "space-around", flex: 1, width: width * 0.8}}>
-                            <View style={{display: "flex", height: 25, elevation: 12}} >
-                                <Text style={{textAlign:'center', color: 'black', fontSize:20, fontWeight: "bold"}}>{cal ? cal.proteins : 0}{` `} </Text>
+                            <View style={styles.innerCard} >
+                                <Text style={styles.innerCardFont}>{cal ? cal.proteins : 0}{`g`} </Text>
                             </View>
-                            <Text style={{color: 'black', fontSize:22, fontWeight: "bold"}}>
+                            <Text style={{color: 'black', fontSize:20, fontWeight: "bold"}}>
                                 Proteins
                             </Text>
                         </View>
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
         display:'flex', 
         flexDirection:'column',
         justifyContent: "center",
-        height: 70, 
+        height: 80, 
         width: width * 0.9, 
         marginVertical: 2.5,
         borderRadius: 10 ,
@@ -151,6 +151,22 @@ const styles = StyleSheet.create({
         elevation: 2,
         paddingHorizontal: 15
     },
+    innerCard: {
+        justifyContent: "center", 
+        alignItems: "center", 
+        borderRadius: 3, 
+        marginRight: 15, 
+        padding: 2,
+        borderWidth: 1,
+        borderColor: "#bdbdbd",
+        width: 80
+    },
+    innerCardFont: {
+        textAlign:'center', 
+        color: 'black', 
+        fontSize:16, 
+        fontWeight: "200"
+    }
 })
 
 

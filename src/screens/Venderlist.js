@@ -47,24 +47,25 @@ const Venderlist =  ({navigation, getVenderlist}) => {
 
     {companies ? companies.map((company, index) =>
     <TouchableOpacity key={index} style={{...styles.list, justifyContent: "space-between"}} onPress={() => redirectToVendors(company)}>
-        <View style={{width: 15, backgroundColor: "green", height: 70,borderRadius: 3, justifyContent: "center", padding: 3}}>
-          <Text style={{color: "white", textAlign: 'center', fontSize: 10}}>{company.vendortype}</Text>
-        </View>
-        <View style={{flexDirection: "column", justifyContent: "center", alignItems: "center", alignContent: "flex-start"}}>
+        <View style={{flexDirection: "column", justifyContent: "center", alignItems: "flex-start", alignContent: "flex-start", marginLeft: 5}}>
           <Text style={{...styles.comapnies, fontWeight: "bold"}}>
             {company.vendorname}
           </Text>
-          <Text style={{textAlign: "center"}}>
-            Address :- {company.cafename}
+          <Text style={{}}>
+            Cafeteria at {company.cafename}
           </Text>
           <Text style={{}}>
-            Contact No :- {company.vendornumber}
+            Contact No. : {company.vendornumber}
           </Text>
         </View>
         <View style={{justifyContent:'center',alignItems:'center',alignContent:'center', flexDirection: 'row'}}>
-          <View style={{height: 30, width: 30, backgroundColor: company.cafedensity < 50 ? "#f44336" :"#00c853", justifyContent:'center',alignItems:'center', borderRadius: 15}}>
-            <Text style={{color: "white", fontSize: 10}}>{company.cafedensity}</Text>
-          </View>
+            <View>
+                <Text style={{fontSize: 10}}>Cafeteria </Text>
+                <Text style={{fontSize: 10}}>Density</Text>
+            </View>
+            <View style={{height: 30, width: 30, backgroundColor: company.cafedensity > 66 ? "#00c853" : company.cafedensity > 33 ? "ff5722" : "#f44336", justifyContent:'center',alignItems:'center', borderRadius: 15}}>
+                <Text style={{color: "white", fontSize: 10}}>{company.cafedensity}</Text>
+            </View>
         </View>
     
     </TouchableOpacity>
@@ -103,8 +104,6 @@ const styles = StyleSheet.create({
     },
     comapnies: {
         fontSize:22,
-        marginHorizontal:15,
-        padding:3,
         flex:1
     },
     list: {

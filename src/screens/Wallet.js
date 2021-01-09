@@ -50,8 +50,8 @@ const Wallet = ({ navigation, walletinfo }) => {
             <View style={{justifyContent:'space-between', alignContent:'center',alignItems:'center'}}>
                 <View>
                     <TouchableOpacity style={styles.card}>
-                        <Text style={{textAlign:'center', color: 'black', fontSize:18, fontWeight: "bold"}}>View History</Text>
-                        <View style={{height: 20, width: 60, backgroundColor: "#a00030", borderRadius: 3, justifyContent: "center", alignItems: "center"}}>
+                        <Text style={{textAlign:'center', color: 'black', fontSize:18, fontWeight: "100"}}>View History</Text>
+                        <View style={{height: 20, width: 80, backgroundColor: "#a00030", borderRadius: 8, justifyContent: "center", alignItems: "center"}}>
                             <Text style={{fontSize: 14, fontWeight: "bold", color: "white", textAlign: "center"}}>view</Text>
                         </View>
                     </TouchableOpacity>
@@ -60,8 +60,8 @@ const Wallet = ({ navigation, walletinfo }) => {
             <View style={{justifyContent:'space-between', alignContent:'center',alignItems:'center'}}>
                 <View>
                     <TouchableOpacity style={styles.card}>
-                        <Text style={{textAlign:'center', color: 'black', fontSize:18, fontWeight: "bold"}}>Recharge Wallet</Text>
-                        <View style={{height: 20, width: 60, backgroundColor: "#a00030", borderRadius: 3, justifyContent: "center", alignItems: "center"}}>
+                        <Text style={{textAlign:'center', color: 'black', fontSize:18, fontWeight: "100"}}>Recharge Wallet</Text>
+                        <View style={{height: 20, width: 80, backgroundColor: "#a00030", borderRadius: 8, justifyContent: "center", alignItems: "center"}}>
                             <Text style={{fontSize: 14, fontWeight: "bold", color: "white", textAlign: "center"}}>pay now</Text>
                         </View>
                     </TouchableOpacity>

@@ -55,7 +55,7 @@ const Orders = ({ type, navigation, getOrders }) => {
                                 Rs. {item.price}/-
                             </Text>
                             <Text style={{flex:1}}>
-                                Order#: {item.orderid}
+                                Order# {item.orderid}
                             </Text>
                         </View>
                     </View>

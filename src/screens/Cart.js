@@ -114,8 +114,7 @@ const Cart = ({ navigation, createOrder }) => {
             backgroundColor:'#f0f0f0'
         }}>
             <Header navigation={navigation} />
-
-
+            {item && item.length > 0 &&
             <View style={{...styles.deliveryAddress, backgroundColor: "#f0f0f0"}}>
             
             {item && item.length > 0 && item.map((cart, index) => 
@@ -155,6 +154,11 @@ const Cart = ({ navigation, createOrder }) => {
             )}
                         
             </View>
+        }
+        {item && item.length <= 0 && 
+        <Text style={{fontSize:18, paddingHorizontal:0, textAlign:'center', paddingVertical:40, fontWeight:'bold',letterSpacing:1}}>
+            Your Cart Seems Empty!
+        </Text>}
         </ScrollView>
         <ScrollView style={{flex:1,position:'absolute', backgroundColor:'white',width:width, borderTopRightRadius:20, borderTopLeftRadius:20, top:'79%',elevation:2}}>
             <View style={{paddingVertical:20, marginBottom:20, padding: 10}}>

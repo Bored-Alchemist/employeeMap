@@ -8,8 +8,7 @@ import { connect } from 'react-redux';
 import { newlogin } from '../action/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loader from '../components/Loader';
-import Eating from '../assets/icons/Eating';
-import axios from 'axios';
+import { Entypo } from '@expo/vector-icons';
 
 const Login = ({ navigation, newlogin }) => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -62,11 +61,12 @@ const Login = ({ navigation, newlogin }) => {
             </View>
                 <View style={styles.formContainer}>
                   <View style={{marginVertical: 5}}>
-                    <Input changeInput={changeInput} value={username} name='username' placeholder="Username" />
+                    <Input changeInput={changeInput} value={username} name='username' placeholder="Username" icon="user" library="FontAwesome" />
                   </View>
                     
                 <View style={{marginVertical: 5}}>
-                    <Input changeInput={changeInput} value={password} name='password' secureTextEntry={true} placeholder="Password"  />
+                    <Input changeInput={changeInput} value={password} name='password' secureTextEntry={true} placeholder="Password" icon="key" library="Entypo"  >
+                    </Input>
                 </View>
                 <View style={{marginVertical: 5}}>
                 <Button label="Login" bgColor={red} textColor="white" clickEvent={()=>loginUser()}  />
@@ -82,15 +82,25 @@ const Login = ({ navigation, newlogin }) => {
             <View style={{ paddingHorizontal: width * 0.07,paddingBottom:20 }}>
                 <View style={{marginTop:20, justifyContent:'center', alignItems:'center', alignContent:'flex-end',marginBottom:10}}>
                     <Text style={{fontSize:16}}>
-                        Don't have an account ? please
+                        {` `}
                     </Text>
                     <Text style={{fontSize:16, fontWeight: "bold"}} onPress={()=>navigation.navigate('Register')}>
-                        SignUp
+                        {` `}
                     </Text>
                 </View>
             </View>
-            <View style={{justifyContent:'center', alignItems:'center', alignContent:'center', height: height * 0.45, backgroundColor: "#f0f0f0"}}>
+            <View style={{justifyContent:'center', alignItems:'center', alignContent:'center', height: height * 0.35, backgroundColor: "#f0f0f0"}}>
                 <Image source={require('../assets/pngs/Image01.png')} style={{width: width * 0.7}} resizeMode='contain' />
+            </View>
+            <View style={{ paddingHorizontal: width * 0.07,paddingBottom:20 }}>
+                <View style={{marginTop:20, justifyContent:'center', alignItems:'center', alignContent:'flex-end',marginBottom:10}}>
+                    <Text style={{fontSize:16}}>
+                        The App Managed By
+                    </Text>
+                    <Text style={{fontSize:16, fontWeight: "bold"}} >
+                        Digital Cafeteria Solutions Pvt. Ltd.
+                    </Text>
+                </View>
             </View>
         </View>
 

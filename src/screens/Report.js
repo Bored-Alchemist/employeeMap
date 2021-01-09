@@ -6,7 +6,7 @@ import { height, width } from '../assets/dimensions';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loader from '../components/Loader';
-import Healthy from '../assets/icons/healthy';
+import { AntDesign } from '@expo/vector-icons'
 
 const Report = ({ navigation, getCalories }) => {
     const [cal, setCal] = useState(null)
@@ -38,20 +38,29 @@ const Report = ({ navigation, getCalories }) => {
                 </Text>
             </View>
             <View style={{height: 210, justifyContent: "center", alignItems: "center", marginTop: 15}}>
-            <Image source={require('../assets/report.png')} style={{height: 200}} resizeMode='contain' />
+            <Image source={require('../assets/report.png')} style={{width: width*0.8}} resizeMode='contain' />
             </View>
             <View style={{justifyContent:'center', alignContent:'center',alignItems:'center'}}>
                 <View>
                     <TouchableOpacity style={{...styles.card}}>
                         <View style={{flexDirection: "row", alignContent: "space-around", flex: 1, width: width * 0.8, justifyContent: "space-between"}}>
-                            <Text style={{color: 'black', fontSize:16, fontWeight: "bold"}}>
-                                Food Comsumption History
-                            </Text>
-                            <View style={{height: 20, width: 70, backgroundColor: "#a00030", borderRadius: 3, justifyContent: "center", alignItems: "center"}}>
+                            <View style={{flex: 1, alignItems: "flex-start", flexDirection: "row"}}>
+                                <AntDesign name="calendar" size={38} color="#a00030" />
+                                <View style={{flexDirection: "column", marginLeft: 10}}>
+                                    <Text style={{color: 'black', fontSize:16, fontWeight: "bold"}}>
+                                        Food Comsumption
+                                    </Text>
+                                    <Text style={{color: 'black', fontSize:16, fontWeight: "bold"}}>
+                                        History
+                                    </Text>
+                                </View>
+                            </View>
+                            
+                            <View style={{height: 20, width: 80, backgroundColor: "#a00030", borderRadius: 8, justifyContent: "center", alignItems: "center"}}>
                                 <Text style={{fontSize: 14, fontWeight: "bold", color: "white", textAlign: "center"}}>Download</Text>
                             </View>
                         </View>
-                        <View style={{flex: 1, justifyContent: "flex-end"}}>
+                        <View style={{justifyContent: "flex-start"}}>
                             <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a00030" progress={cal ? parseInt(cal.calories)/2500 : 0} />
                         </View>
                     </TouchableOpacity>
@@ -61,14 +70,17 @@ const Report = ({ navigation, getCalories }) => {
             <View>
                     <TouchableOpacity style={{...styles.card}}>
                         <View style={{flexDirection: "row", alignContent: "space-between", flex: 1, width: width * 0.8, justifyContent: "space-between"}}>
-                            <Text style={{color: 'black', fontSize:16, fontWeight: "bold"}}>
-                                Wallet History
-                            </Text>
-                            <View style={{height: 20, width: 70, backgroundColor: "#a00030", borderRadius: 3, justifyContent: "center", alignItems: "center"}}>
+                            <View style={{flex: 1, alignItems: "flex-start", flexDirection: "row"}}>
+                                <AntDesign name="calendar" size={38} color="#a00030" />
+                                <Text style={{color: 'black', fontSize:16, fontWeight: "bold", marginLeft: 10}}>
+                                    Wallet History
+                                </Text>
+                            </View>
+                            <View style={{height: 20, width: 80, backgroundColor: "#a00030", borderRadius: 8, justifyContent: "center", alignItems: "center"}}>
                                 <Text style={{fontSize: 14, fontWeight: "bold", color: "white", textAlign: "center"}}>Download</Text>
                             </View>
                         </View>
-                        <View style={{flex: 1, justifyContent: "flex-end"}}>
+                        <View style={{justifyContent: "flex-start"}}>
                             <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a00030" progress={cal ? parseInt(cal.carbs)/2500 : 0} />
                         </View>
                     </TouchableOpacity>
@@ -78,14 +90,22 @@ const Report = ({ navigation, getCalories }) => {
             <View>
                     <TouchableOpacity style={{...styles.card}}>
                         <View style={{flexDirection: "row", alignContent: "space-around", flex: 1, width: width * 0.8, justifyContent: "space-between"}}>
-                            <Text style={{color: 'black', fontSize:16, fontWeight: "bold"}}>
-                                Nutrition Value History
-                            </Text>
-                            <View style={{height: 20, width: 70, backgroundColor: "#a00030", borderRadius: 3, justifyContent: "center", alignItems: "center"}}>
+                            <View style={{flex: 1, alignItems: "flex-start", flexDirection: "row"}}>
+                                <AntDesign name="calendar" size={38} color="#a00030" />
+                                <View style={{flexDirection: "column", marginLeft: 10}}>
+                                    <Text style={{color: 'black', fontSize:16, fontWeight: "bold"}}>
+                                        Nutrition Value
+                                    </Text>
+                                    <Text style={{color: 'black', fontSize:16, fontWeight: "bold"}}>
+                                        History
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={{height: 20, width: 80, backgroundColor: "#a00030", borderRadius: 8, justifyContent: "center", alignItems: "center"}}>
                                 <Text style={{fontSize: 14, fontWeight: "bold", color: "white", textAlign: "center"}}>Download</Text>
                             </View>
                         </View>
-                        <View style={{flex: 1, justifyContent: "flex-end"}}>
+                        <View style={{justifyContent: "flex-start"}}>
                             <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a00030" progress={cal ? parseInt(cal.fats)/2500 : 0} />
                         </View>
                     </TouchableOpacity>
@@ -122,7 +142,7 @@ const styles = StyleSheet.create({
         display:'flex', 
         flexDirection:'column',
         justifyContent: "center",
-        height: 80, 
+        height: 90, 
         width: width * 0.9, 
         marginVertical: 2.5,
         borderRadius: 10 ,
