@@ -1,16 +1,13 @@
 
 
 import React from 'react';
-import { StyleSheet, View, Image, Text } from 'react-native';
+import { StyleSheet, View, Image, Text, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 
  const Loader = ({  }) => {
     return (
         <View style={styles.loaderContainer}>
-            <Image source={require('../assets/logo.png')} style={{
-                    height: 70, width: 70
-                }} />
-                <Text>Loading...</Text>
+            <ActivityIndicator size={70} color="#a00030" animating />
         </View>
     )
 }

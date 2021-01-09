@@ -81,6 +81,7 @@ import Button from '../components/Button';
                 containerStyle={{marginBottom: mar,marginHorizontal: 20, marginVertical: 5}}
                 style={{backgroundColor: "#a00030",  justifyContent: "center", alignItems: "center"}}
                 dropDownStyle={{justifyContent: "center", alignItems: "center"}}
+                itemStyle={{justifyContent: "flex-start"}}
                 activeLabelStyle={{color: 'red'}}
                 activeItemStyle={{color: "white"}}
                 labelStyle={{fontWeight: "bold"}}
@@ -101,6 +102,7 @@ import Button from '../components/Button';
                     {label: 'DietB', value: 'dietB'},
                 ]}
                 defaultValue={subOption}
+                itemStyle={{justifyContent: "flex-start"}}
                 onOpen={() => setMar2(150)}
                 onClose={() => setMar2(0)}
                 selectedLabelStyle={{color: "white"}}
