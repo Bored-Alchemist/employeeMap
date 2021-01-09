@@ -3,7 +3,7 @@ import { View, StyleSheet, Image, Text, Modal, TouchableHighlight } from 'react-
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { height, width } from '../assets/dimensions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Badge} from 'react-native-elements';
+import {Badge, Avatar} from 'react-native-elements';
 import userData from '../../App';
 
 
@@ -44,14 +44,22 @@ import userData from '../../App';
             </View>
             <View style={{flex: 1, justifyContent: "flex-end", flexDirection: 'row'}}>
               {!image && <View style={{...styles.end, width: 60}}>
-                <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
+                {/* <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
                   <Image source={require('../assets/pngs/Icon03.png')} style={{height: 30}} resizeMode='contain'/>
                 </TouchableOpacity>
                 {cartItem === 0 ? <></> : <Badge
                   status="error"
                   containerStyle={{ position: 'absolute', right: 0, top: 0}}
                   value={cartItem}
-                />}
+                />} */}
+                <TouchableOpacity style={{height: 45, justifyContent: "center", alignItems: "center"}} onPress={() => navigation.navigate('Cart')}>
+                  <Image source={require('../assets/pngs/Icon03.png')} style={{height: 30, width: 50}} resizeMode='contain'/>
+                  {cartItem === 0 ? <></> : <Badge
+                    status="error"
+                    containerStyle={{ position: 'absolute', top: 0, right: 0}}
+                    value={cartItem}
+                  />}
+                </TouchableOpacity>
               </View>}
               <View style={{...styles.end, width: 50}}>
                 <TouchableOpacity onPress={() => navigation.openDrawer()} >
