@@ -5,8 +5,8 @@ import { dark_grey } from '../assets/colors';
 
  const Button = ({ label, clickEvent, bgColor, textColor }) => {
     return (
-       <TouchableOpacity style={{...styles.button, backgroundColor: bgColor ? bgColor : '#a00030'}} onPress={clickEvent}>
-           <Text style={{ color: textColor?textColor:'white', fontSize: 16, fontWeight: 'bold' }}>
+       <TouchableOpacity style={{...styles.button, backgroundColor: bgColor ? bgColor : '#a40032'}} onPress={clickEvent}>
+           <Text style={{ color: textColor?textColor:'white', fontSize: 15, fontWeight: 'bold' }}>
                 {label}
            </Text>
        </TouchableOpacity>

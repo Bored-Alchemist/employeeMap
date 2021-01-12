@@ -57,7 +57,7 @@ import {showToast} from '../action/auth';
                         </View>
                         <View  style={{justifyContent:'flex-end',alignContent:'center',alignItems:'center', marginRight: 20,marginBottom: 25}}>
                             <TouchableOpacity onPress={()=>addToCart(item)}>
-                                <Text style={{backgroundColor: "#a00030", borderRadius:10, padding:7, color:'white', fontSize: 12}}>
+                                <Text style={{backgroundColor: "#a40032", borderRadius:10, padding:7, color:'white', fontSize: 12}}>
                                     Add to Cart
                                 </Text>
                             </TouchableOpacity>
@@ -89,7 +89,7 @@ import {showToast} from '../action/auth';
                         </View>
                         <View  style={{justifyContent:'center',alignContent:'center',alignItems:'center', marginRight: 20,}}>
                             <TouchableOpacity onPress={()=>addToCart(item)}>
-                                <Text style={{backgroundColor: "#a00030", borderRadius:10, padding:10, color:'white'}}>
+                                <Text style={{backgroundColor: "#a40032", borderRadius:10, padding:10, color:'white'}}>
                                     Add to Cart
                                 </Text>
                             </TouchableOpacity>

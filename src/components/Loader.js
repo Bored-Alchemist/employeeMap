@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
  const Loader = ({  }) => {
     return (
         <View style={styles.loaderContainer}>
-            <ActivityIndicator size={70} color="#a00030" animating />
+            <ActivityIndicator size={70} color="#a40032" animating />
         </View>
     )
 }

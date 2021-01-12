@@ -64,13 +64,13 @@ const Feedback = ({ navigation, feedbackapi }) => {
                 <Image source={require('../assets/pngs/Image04.png')} resizeMode="contain" style={{height: height*0.3}} />
             </View>
             <View style={{flex:1, justifyContent:'center',alignItems:'center', paddingHorizontal:20}}>
-                    <Text style={{fontSize:30, letterSpacing:2, fontWeight:'bold', color: '#a00030'}}>
+                    <Text style={{fontSize:30, letterSpacing:2, fontWeight:'bold', color: '#a40032'}}>
                         Thank You
                     </Text>
-                    <Text style={{fontSize:16,marginTop:20, textAlign:'center', color: '#a00030'}}>
+                    <Text style={{fontSize:16,marginTop:20, textAlign:'center', color: '#a40032'}}>
                         Your order will be safely and successfully delivered
                     </Text>
-                    <Text style={{fontSize: 20, fontWeight: "bold", color: "#a00030"}}>Please Rate Your Experience</Text>
+                    <Text style={{fontSize: 20, fontWeight: "bold", color: "#a40032"}}>Please Rate Your Experience</Text>
                     {stars()}
             </View>
             

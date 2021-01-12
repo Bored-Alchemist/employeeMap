@@ -43,7 +43,7 @@ const Wallet = ({ navigation, walletinfo }) => {
                 <View>
                     <TouchableOpacity style={styles.card}>
                         <Text style={{textAlign:'center', color: 'black', fontSize:18, fontWeight: "bold"}}>Current Ballence</Text>
-                        <Text style={{textAlign:'center', color: '#a00030', fontSize:30, fontWeight: "bold"}}>{wallet.balance}{`/-`}</Text>
+                        <Text style={{textAlign:'center', color: '#a40032', fontSize:30, fontWeight: "bold"}}>{wallet.balance}{`/-`}</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -51,7 +51,7 @@ const Wallet = ({ navigation, walletinfo }) => {
                 <View>
                     <TouchableOpacity style={styles.card}>
                         <Text style={{textAlign:'center', color: 'black', fontSize:18, fontWeight: "100"}}>View History</Text>
-                        <View style={{height: 20, width: 80, backgroundColor: "#a00030", borderRadius: 8, justifyContent: "center", alignItems: "center"}}>
+                        <View style={{height: 20, width: 80, backgroundColor: "#a40032", borderRadius: 8, justifyContent: "center", alignItems: "center"}}>
                             <Text style={{fontSize: 14, fontWeight: "bold", color: "white", textAlign: "center"}}>view</Text>
                         </View>
                     </TouchableOpacity>
@@ -61,7 +61,7 @@ const Wallet = ({ navigation, walletinfo }) => {
                 <View>
                     <TouchableOpacity style={styles.card}>
                         <Text style={{textAlign:'center', color: 'black', fontSize:18, fontWeight: "100"}}>Recharge Wallet</Text>
-                        <View style={{height: 20, width: 80, backgroundColor: "#a00030", borderRadius: 8, justifyContent: "center", alignItems: "center"}}>
+                        <View style={{height: 20, width: 80, backgroundColor: "#a40032", borderRadius: 8, justifyContent: "center", alignItems: "center"}}>
                             <Text style={{fontSize: 14, fontWeight: "bold", color: "white", textAlign: "center"}}>pay now</Text>
                         </View>
                     </TouchableOpacity>

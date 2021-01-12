@@ -10,7 +10,7 @@
     "splash": {
       "image": "./src/assets/pngs/splash.png",
       "resizeMode" : "contain",
-      "backgroundColor": "#a00030"
+      "backgroundColor": "#a40032"
     },
     "sdkVersion" : "38.0.0",
     "updates": {

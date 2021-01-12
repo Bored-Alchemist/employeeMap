@@ -87,21 +87,21 @@ const Qrcode = ({ navigation, feedbackapi, route }) => {
                     </View>
                 </View>
                 <View style={{flex:1, justifyContent:'center',alignItems:'center', paddingHorizontal:20, marginTop: 100}}>
-                        <Text style={{fontSize: 20, fontWeight: "bold", color: "#a00030"}}>Please Rate Your Experience</Text>
+                        <Text style={{fontSize: 20, fontWeight: "bold", color: "#a40032"}}>Please Rate Your Experience</Text>
                         {stars()}
                 </View>
             </View>
          </ScrollView>
-         <ScrollView style={{flex:1,position:'absolute', backgroundColor:'#f0f0f0',width:width, borderTopRightRadius:20, borderTopLeftRadius:20, top:'86%'}}>
+         {/* <ScrollView style={{flex:1,position:'absolute', backgroundColor:'#f0f0f0',width:width, borderTopRightRadius:20, borderTopLeftRadius:20, top:'86%'}}>
             <View style={{paddingVertical:20, marginBottom:40, padding: 10}}>
                 <View style={{width: width, justifyContent: "center", paddingEnd: 20 }}>
-                    <Button label="Submit" bgColor="#a00030" textColor="white" clickEvent={()=>{
+                    <Button label="Submit" bgColor="#a40032" textColor="white" clickEvent={()=>{
                         submit()
                         navigation.navigate('Home');
                     }} />
                 </View>
             </View>
-        </ScrollView>
+        </ScrollView> */}
          </>
     )
 }

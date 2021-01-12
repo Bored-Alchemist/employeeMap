@@ -29,7 +29,7 @@ const OrderSuccess = ({ navigation }) => {
                 <Image source={require('../assets/pngs/Image03.png')} resizeMode="contain" style={{height: height*0.3}} />
             </View>
             <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
-                    <Text style={{fontSize:30, letterSpacing:2, fontWeight:'bold', color: '#a00030'}}>
+                    <Text style={{fontSize:30, letterSpacing:2, fontWeight:'bold', color: '#a40032'}}>
                         Order Successful
                     </Text>
                     <Text style={{fontSize:16,marginTop:20, justifyContent: "center", alignItems: "center"}}>
@@ -39,7 +39,7 @@ const OrderSuccess = ({ navigation }) => {
             <View style={{flex:1, paddingHorizontal:20}}>
                 <Button label="Give Feedback" clickEvent={()=>navigation.navigate('Feedback')} />
                 <View style={{flex:1,marginTop:20}}>
-                <Button label="Continue Shopping" bgColor="#a00030" textColor="white" clickEvent={()=>navigation.navigate('Home')} />
+                <Button label="Continue Shopping" bgColor="#a40032" textColor="white" clickEvent={()=>navigation.navigate('Home')} />
             </View>
             </View>
             

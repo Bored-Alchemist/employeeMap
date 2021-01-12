@@ -79,7 +79,7 @@ import Button from '../components/Button';
                 onOpen={() => setMar(80)}
                 onClose={() => setMar(0)}
                 containerStyle={{marginBottom: mar,marginHorizontal: 20, marginVertical: 5}}
-                style={{backgroundColor: "#a00030",  justifyContent: "center", alignItems: "center"}}
+                style={{backgroundColor: "#a40032",  justifyContent: "center", alignItems: "center"}}
                 dropDownStyle={{justifyContent: "center", alignItems: "center"}}
                 itemStyle={{justifyContent: "flex-start"}}
                 activeLabelStyle={{color: 'red'}}
@@ -107,7 +107,7 @@ import Button from '../components/Button';
                 onClose={() => setMar2(0)}
                 selectedLabelStyle={{color: "white"}}
                 containerStyle={{marginBottom: mar2,marginHorizontal: 20, marginVertical: 5,}}
-                style={{backgroundColor: "#a00030",  justifyContent: "center", alignItems: "center"}}
+                style={{backgroundColor: "#a40032",  justifyContent: "center", alignItems: "center"}}
                 dropDownStyle={{justifyContent: "center", alignItems: "center"}}
                 activeLabelStyle={{color: 'red'}}
                 labelStyle={{fontWeight: "bold"}}
@@ -124,7 +124,7 @@ import Button from '../components/Button';
         {!loading && <ScrollView style={{position:'absolute', backgroundColor:'white',width:width, top:'90%',elevation:2}}>
             <View style={{paddingVertical:20, marginBottom:20, padding: 10}}>
                 <View style={{width: width, justifyContent: "center", paddingEnd: 20 }}>
-                    <Button label="View Cart" bgColor="#a00030" textColor="white" clickEvent={()=>{navigation.navigate("Cart")}}  />
+                    <Button label="View Cart" bgColor="#a40032" textColor="white" clickEvent={()=>{navigation.navigate("Cart")}}  />
                 </View>
             </View>
         </ScrollView>}

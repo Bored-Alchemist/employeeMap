@@ -138,14 +138,14 @@ const Cart = ({ navigation, createOrder }) => {
                                 </View>
                                 <View style={{flexDirection:'row', alignItems: 'center'}}>
                                     <TouchableOpacity style={{marginHorizontal: 5}} onPress={()=> deleteItem(cart)}>
-                                        <Ionicons name="md-trash" size={25} color="#a00030" />
+                                        <Ionicons name="md-trash" size={25} color="#a40032" />
                                     </TouchableOpacity>
                                     <TouchableOpacity style={{marginHorizontal: 5}} onPress={()=>removeItem(cart)}>
-                                        <Ionicons name="ios-remove-circle-outline" size={25} color="#a00030" />
+                                        <Ionicons name="ios-remove-circle-outline" size={25} color="#a40032" />
                                     </TouchableOpacity>
                                         <Text style={{marginHorizontal: 5}}>{cart.quantity}</Text>
                                     <TouchableOpacity style={{marginHorizontal: 5}} onPress={()=>addToCart(cart)}>
-                                        <Ionicons name="ios-add-circle-outline" size={25} color="#a00030" />
+                                        <Ionicons name="ios-add-circle-outline" size={25} color="#a40032" />
                                     </TouchableOpacity>
                                 </View>
                             </View>

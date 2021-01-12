@@ -31,7 +31,7 @@ import ProgressCircle from 'react-native-progress-circle'
                     sliderBoxHeight={175}
                     parentWidth={width*0.9}
                     onCurrentImagePressed={index => console.log(`image ${index} pressed`)}
-                    dotColor="#a00030"
+                    dotColor="#a40032"
                     inactiveDotColor="#90A4AE"
                     paginationBoxVerticalPadding={20}
                     autoplay
@@ -74,13 +74,13 @@ import ProgressCircle from 'react-native-progress-circle'
                         <Text style={{ color: 'black', fontSize:16}}>
                             Vendor-01
                         </Text>
-                        <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a00030" progress={density ? density/100 : 0} />
+                        <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a40032" progress={density ? density/100 : 0} />
                     </View>
                     <ProgressCircle
                         percent={density}
                         radius={45}
                         borderWidth={15}
-                        color="#a00030"
+                        color="#a40032"
                         shadowColor="#999"
                         bgColor="#fff"
                     >

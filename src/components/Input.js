@@ -8,8 +8,8 @@ import { Entypo, FontAwesome } from "@expo/vector-icons"
             backgroundColor: "#eceff1"}}>
             <View style={{flex:1,flexDirection: "row", alignItems: "center"}}>
                 <View style={{height: 20, width: 30, marginLeft: 10, }}>
-                    {library === "Entypo" && <Entypo name={icon} size={22} color="#a00030" /> }
-                    {library === "FontAwesome" && <FontAwesome name={icon} size={22} color="#a00030" /> }
+                    {library === "Entypo" && <Entypo name={icon} size={22} color="#a40032" /> }
+                    {library === "FontAwesome" && <FontAwesome name={icon} size={22} color="#a40032" /> }
                 </View>
                 <TextInput secureTextEntry={secureTextEntry} placeholder={placeholder} value={value} name={name} onChangeText={(e) => changeInput(e, name)} 
                 style={{ ...styles.input, marginVertical: mar ? 6 : 0,  

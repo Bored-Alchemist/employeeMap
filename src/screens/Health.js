@@ -52,7 +52,7 @@ const Health = ({ navigation, getCalories }) => {
                             </Text>
                         </View>
                         <View style={{flex: 1, justifyContent: "flex-end"}}>
-                            <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a00030" progress={cal ? parseInt(cal.calories)/2500 : 0} />
+                            <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a40032" progress={cal ? parseInt(cal.calories)/2500 : 0} />
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -69,7 +69,7 @@ const Health = ({ navigation, getCalories }) => {
                             </Text>
                         </View>
                         <View style={{flex: 1, justifyContent: "flex-end"}}>
-                            <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a00030" progress={cal ? parseInt(cal.carbs)/2500 : 0} />
+                            <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a40032" progress={cal ? parseInt(cal.carbs)/2500 : 0} />
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -86,7 +86,7 @@ const Health = ({ navigation, getCalories }) => {
                             </Text>
                         </View>
                         <View style={{flex: 1, justifyContent: "flex-end"}}>
-                            <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a00030" progress={cal ? parseInt(cal.fats)/2500 : 0} />
+                            <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a40032" progress={cal ? parseInt(cal.fats)/2500 : 0} />
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -103,7 +103,7 @@ const Health = ({ navigation, getCalories }) => {
                             </Text>
                         </View>
                         <View style={{flex: 1, justifyContent: "flex-end"}}>
-                            <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a00030" progress={cal ? parseInt(cal.proteins)/2500 : 0} />
+                            <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} color="#a40032" progress={cal ? parseInt(cal.proteins)/2500 : 0} />
                         </View>
                     </TouchableOpacity>
                 </View>
